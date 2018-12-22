@@ -2,29 +2,42 @@ package App;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class App {
 
     public static void main(String[] args) throws Exception {
-        Map<String, String> users = new HashMap<>();
-        users.put("pedro","pedro");
+        Map<String, User> users = new HashMap<>();
+        User u1 = new User("pedro", "pedro", "pedro@mail.com", 0.0);
 
-        Map<Integer, Server> servers = new HashMap<>();
+        users.put(u1.getUserName(),u1);
+        Map<Integer, ServerBuffer> servers = new HashMap<>();
+        ServerBuffer type1 = new ServerBuffer(3, "s1.small");
+        ServerBuffer type2 = new ServerBuffer(3, "l1.large");
+
         Server s1 = new Server(1,"s1.small", 2.00);
-        Server s2 = new Server(2,"s2.small", 2.00);
-        Server s3 = new Server(3,"s3.small", 2.00);
-        Server s4 = new Server(4,"l1.large", 4.00);
-        Server s5 = new Server(5,"l2.large", 4.00);
-        Server s6 = new Server(6,"l3.large", 4.00);
-        servers.put(1,s1);
-        servers.put(2,s2);
-        servers.put(3,s3);
-        servers.put(4,s4);
-        servers.put(5,s5);
-        servers.put(6,s6);
+        Server s2 = new Server(1,"s1.small", 2.00);
+        Server s3 = new Server(1,"s1.small", 2.00);
+        Server s4 = new Server(2,"l1.large", 4.00);
+        Server s5 = new Server(2,"l1.large", 4.00);
+        Server s6 = new Server(2,"l1.large", 4.00);
 
+        type1.putServer(s1);
+        type1.putServer(s2);
+        type1.putServer(s3);
+
+
+
+        type2.putServer(s4);
+        type2.putServer(s5);
+        type2.putServer(s6);
+
+
+        servers.put(1,type1);
+        servers.put(2,type2);
 
         int port = Integer.parseInt(args[0]);
         ServerSocket ss = new ServerSocket(port);
@@ -32,11 +45,11 @@ public class App {
 
         int soma = 0;
         String line ;
-        BoundedBuffer b = new BoundedBuffer(100);
 
         while(true){
+            //System.out.println("hello");
             Socket cs = ss.accept();
-            ClientThread t = new ClientThread(b, cs, users,servers);
+            ClientThread t = new ClientThread(cs, users,servers);
             t.start();
         }
     }

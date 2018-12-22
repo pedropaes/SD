@@ -1,63 +1,59 @@
 package App;
 
-import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 public class Server {
     private String id;
-    private int num;
+    private int type;
     private String user;
-    private boolean ocupado;
     private double preco;
 
     private String key;
+
     private LocalDateTime inicio;
     private LocalDateTime fim;
 
-    public Server(int num, String id, double preco){
-        this.num = num;
+    public Server(int t, String id, double preco){
+        this.type = t;
         this.id = id;
         this.preco = preco;
-        this.ocupado = false;
+        this.user = "";
     }
 
-    public int getNum(){
-        return this.num;
-    }
-
-    public boolean isFree(){
-        return !ocupado;
+    public int getType(){
+        return this.type;
     }
 
     public String toString(){
-        StringBuilder s = new StringBuilder();
-        s.append("Servidor: " + this.id + " ");
-        s.append("Preço: "+ this.preco);
-        return s.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.key + " ");
+        sb.append("Servidor: " + this.id + " ");
+        sb.append("Preço: "+ this.preco);
+        return sb.toString();
     }
 
-    public String reserva(String user, LocalDateTime inicio){
-        this.user = user;
+    public String reserva(User user, LocalDateTime inicio){
+        this.user = user.getUserName();
+        user.getReservas().add(this);
         this.inicio = inicio;
-        this.ocupado = true;
 
-        byte[] array = new byte[7]; // length is bounded by 7
-        new Random().nextBytes(array);
-        String chave = new String(array, Charset.forName("UTF-8"));
+        String chave = Long.toHexString(Double.doubleToLongBits(Math.random()));
+
         this.key = chave;
         return chave;
     }
 
-    public double cancelareserva(String key){
-        if(this.key == key){
-            this.ocupado = false;
-            this.user = "";
-            long diff = ChronoUnit.SECONDS.between(this.fim, this.inicio);
+    public String getKey(){
+        return this.key;
+    }
+
+    public double getPrice(String key){
+            this.fim = LocalDateTime.now();
+            long diff = ChronoUnit.SECONDS.between(this.inicio, this.fim);
             return this.preco*diff;
-        }
-        return 0.0;
+
     }
 
 }

@@ -10,18 +10,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 class ClientThread extends Thread{
-    private String id;
+    private String user;
     private boolean logged;
     private boolean running;
-    BoundedBuffer b;
     Socket s;
     BufferedReader br;
     PrintWriter pw;
-    Map<String, String> users ;
-    Map<Integer, Server> servers ;
+    Map<String, User> users ;
+    Map<Integer, ServerBuffer> servers ;
 
-    public ClientThread(BoundedBuffer b, Socket s, Map<String, String> users, Map<Integer, Server> servers) throws Exception{
-        this.b = b;
+    public ClientThread(Socket s, Map<String, User> users, Map<Integer, ServerBuffer> servers) throws Exception{
         this.s = s;
         this.users = users;
         this.servers = servers;
@@ -42,8 +40,10 @@ class ClientThread extends Thread{
             pw.flush();
             password = br.readLine();
             if (users.containsKey(login)){
-                if (password.equals(users.get(login))){ this.logged = true;
-                    this.id = login;
+                User u = users.get(login);
+                if (u.login(password)){
+                    this.logged = true;
+                    this.user = login;
                     pw.println("Bemvindo...\n");
                     pw.flush();}
                 else this.logged = false;
@@ -90,14 +90,14 @@ class ClientThread extends Thread{
         }
         catch (Exception e){System.out.println("Erro na leitura");}
         switch (option) {
-            case "1":
-                break;
-            case "2": escolherServidor();
-                break;
-            case "3":
-                break;
-            case "4":
-                break;
+            case "1":   verReservas();
+                        break;
+            case "2":   escolherServidor();
+                        break;
+            case "3":   libertarServidor();
+                        break;
+            case "4":   consulta();
+                        break;
             case "5":   menuPrincipal();
                         this.logged = false;
                         break;
@@ -109,36 +109,78 @@ class ClientThread extends Thread{
     }
 
     public void consulta(){
+        User u = users.get(this.user);
+        pw.println("Saldo para liquidar: " + u.getValor());
+    }
+
+    public void verReservas(){
+        User u = users.get(this.user);
+        List <Server>  lista = u.getReservas();
+        for(Server s: lista){
+            pw.println(s.toString());
+        }
+        pw.flush();
+    }
+
+
+    public void libertarServidor(){
+        User u = this.users.get(this.user);
+        pw.println("Indique a chave do servidor que deseja libertar:");
+        pw.flush();
+        String k = "";
+        try{
+            k = br.readLine();
+        }catch (Exception e) {
+            System.out.println("Erro na leitura");
+        }
+        List<Server> servers = u.getReservas();
+        Iterator<Server> iter = servers.iterator();
+
+        while(iter.hasNext()){
+            Server s = iter.next();
+            if(s.getKey().equals(k)){
+                u.charge(s.getPrice(k));
+                ServerBuffer sb = this.servers.get(s.getType());
+                sb.putServer(s);
+                iter.remove();
+
+            }
+        }
 
     }
 
-    public void escolherServidor() {
-        //
-        List<String> lista;
 
-        lista = this.servers.values().stream().filter(entry -> entry.isFree()).map(x -> x.getNum() +" - "+ x.toString()).collect(Collectors.toList());
-        Collections.sort(lista);
-        if(lista.size() == 0) pw.println("Não existem servidores disponiveis!");
+    public void escolherServidor() {
+
+        List<String> lista ;
+        lista =  servers.entrySet().stream().sorted(Map.Entry.<Integer, ServerBuffer>comparingByKey()).map(x -> x.getKey() +" - "+ x.getValue().getType()).collect(Collectors.toList());
+
         for(int i = 0; i < lista.size();i++){
             pw.println(lista.get(i));
         }
+        int n = 0;
+
         pw.flush();
         String option = "";
         try {
             option = br.readLine();
+            n = Integer.parseInt(option);
 
         } catch (Exception e) {
             System.out.println("Erro na leitura");
         }
         try {
-            if(this.servers.containsKey(Integer.parseInt(option))){
-                Server s = servers.get(Integer.parseInt(option));
-                s.reserva(this.id, LocalDateTime.now());
+            if(this.servers.containsKey(n)){
+                Server s = this.servers.get(n).getServer();
+                System.out.println(s.toString());
+                User u = this.users.get(this.user);
+                pw.println(s.reserva(u,LocalDateTime.now()));
+                pw.flush();
             }
-            else{pw.println("Servidor ocupado/inexistente");pw.flush();}
+            else{pw.println("Servidor inexistente");pw.flush();}
 
         } catch (Exception e) {
-            System.out.println("Erro na leitura");
+            System.out.println("Erro na leituuuuuuuuuura");
         }
     }
     public void menuPrincipal () throws IOException {
@@ -152,7 +194,7 @@ class ClientThread extends Thread{
         try{
             option = br.readLine();
         }
-        catch (Exception e){System.out.println("Erro na leituuuuuuuuuuuuura");}
+        catch (Exception e){System.out.println("Erro na leitura");}
         switch (option) {
             case "1":   registo();
                         break;
@@ -160,8 +202,8 @@ class ClientThread extends Thread{
                         break;
             case "3":   running= false;
                         break;
-            default:
-                break;
+            default:    System.out.println("Opção Inválida");
+                        break;
         }
         System.out.println(option);
 
