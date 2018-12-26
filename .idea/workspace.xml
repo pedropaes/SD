@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ae29a03-9d87-474d-b5c7-adab277ca181" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjetoSD/App/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjetoSD/App/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjetoSD/App/BoundedBuffer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjetoSD/App/BoundedBuffer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjetoSD/App/ClientThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjetoSD/App/ClientThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjetoSD/App/ServerBuffer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjetoSD/App/ServerBuffer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/ClientThread.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -48,8 +41,8 @@
       <file leaf-file-name="ClientThread.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App/ClientThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="82" column="41" lean-forward="true" selection-start-line="82" selection-start-column="41" selection-end-line="82" selection-end-column="41" />
+            <state relative-caret-position="374">
+              <caret line="197" column="26" selection-start-line="197" selection-start-column="26" selection-end-line="197" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -217,12 +210,12 @@
       <option name="presentableId" value="Default" />
       <updated>1545095465025</updated>
       <workItem from="1545865314709" duration="739000" />
-      <workItem from="1545866065184" duration="62000" />
+      <workItem from="1545866065184" duration="1256000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="801000" />
+    <option name="totallyTimeSpent" value="1995000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
@@ -728,8 +721,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App/ClientThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="82" column="41" lean-forward="true" selection-start-line="82" selection-start-column="41" selection-end-line="82" selection-end-column="41" />
+        <state relative-caret-position="374">
+          <caret line="197" column="26" selection-start-line="197" selection-start-column="26" selection-end-line="197" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
