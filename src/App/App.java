@@ -29,8 +29,6 @@ public class App {
         type1.putServer(s2);
         type1.putServer(s3);
 
-
-
         type2.putServer(s4);
         type2.putServer(s5);
         type2.putServer(s6);
@@ -42,12 +40,10 @@ public class App {
         int port = Integer.parseInt(args[0]);
         ServerSocket ss = new ServerSocket(port);
 
-
         int soma = 0;
         String line ;
 
         while(true){
-            //System.out.println("hello");
             Socket cs = ss.accept();
             ClientThread t = new ClientThread(cs, users,servers);
             t.start();

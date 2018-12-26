@@ -33,10 +33,10 @@ class ClientThread extends Thread{
         String login, password;
 
         try {
-            pw.println("Utilizador: ");
+            pw.print("\nUtilizador: ");
             pw.flush();
             login = br.readLine();
-            pw.println("Password: ");
+            pw.print("Password: ");
             pw.flush();
             password = br.readLine();
             if (users.containsKey(login)){
@@ -44,7 +44,7 @@ class ClientThread extends Thread{
                 if (u.login(password)){
                     this.logged = true;
                     this.user = login;
-                    pw.println("Bemvindo...\n");
+                    pw.println("\nBemvindo...\n");
                     pw.flush();}
                 else this.logged = false;
             }
@@ -64,7 +64,7 @@ class ClientThread extends Thread{
 
     public void registo() throws IOException {
         String nome, email;
-        pw.println("Escolha o username:");
+        pw.println("\nEscolha o username:");
         pw.flush();
         nome = br.readLine();
         if(users.containsKey(nome)){pw.println("\n Username já existe!\n"); return;}
@@ -76,13 +76,13 @@ class ClientThread extends Thread{
 
 
     public void menuUtilizador () throws IOException {
-        pw.println("Escolha uma opção:");
-        pw.println("==================");
+        pw.println("==================\n");
         pw.println("1) Ver Reservas");
         pw.println("2) Reservar Servidor");
         pw.println("3) Libertar Servidor");
         pw.println("4) Consultar Conta");
         pw.println("5) Sair");
+        pw.print("Escolha uma opção: ");
         pw.flush();
         String option = "";
         try{
@@ -110,7 +110,7 @@ class ClientThread extends Thread{
 
     public void consulta(){
         User u = users.get(this.user);
-        pw.println("Saldo para liquidar: " + u.getValor());
+        pw.println("\nSaldo para liquidar: " + u.getValor());
     }
 
     public void verReservas(){
@@ -125,13 +125,13 @@ class ClientThread extends Thread{
 
     public void libertarServidor(){
         User u = this.users.get(this.user);
-        pw.println("Indique a chave do servidor que deseja libertar:");
+        pw.println("\nIndique a chave do servidor que deseja libertar:");
         pw.flush();
         String k = "";
         try{
             k = br.readLine();
         }catch (Exception e) {
-            System.out.println("Erro na leitura");
+            System.out.println("\nErro na leitura");
         }
         List<Server> servers = u.getReservas();
         Iterator<Server> iter = servers.iterator();
@@ -167,7 +167,7 @@ class ClientThread extends Thread{
             n = Integer.parseInt(option);
 
         } catch (Exception e) {
-            System.out.println("Erro na leitura");
+            System.out.println("\nErro na leitura");
         }
         try {
             if(this.servers.containsKey(n)){
@@ -177,32 +177,32 @@ class ClientThread extends Thread{
                 pw.println(s.reserva(u,LocalDateTime.now()));
                 pw.flush();
             }
-            else{pw.println("Servidor inexistente");pw.flush();}
+            else{pw.println("\nServidor inexistente");pw.flush();}
 
         } catch (Exception e) {
-            System.out.println("Erro na leituuuuuuuuuura");
+            System.out.println("\nErro na leituuuuuuuuuura");
         }
     }
     public void menuPrincipal () throws IOException {
-        pw.println("Escolha uma opção:");
-        pw.println("==================");
+        pw.println("\n==================\n");
         pw.println("1) Registo");
         pw.println("2) Login");
         pw.println("3) Sair");
+        pw.print("Escolha uma opção: ");
         pw.flush();
         String option = "";
         try{
             option = br.readLine();
         }
-        catch (Exception e){System.out.println("Erro na leitura");}
+        catch (Exception e){System.out.println("\nErro na leitura");}
         switch (option) {
             case "1":   registo();
                         break;
             case "2":   login();
                         break;
-            case "3":   running= false;
+            case "3":   running = false;
                         break;
-            default:    System.out.println("Opção Inválida");
+            default:    System.out.println("\nOpção Inválida");
                         break;
         }
         System.out.println(option);
@@ -223,7 +223,7 @@ class ClientThread extends Thread{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            }
+        }
         try {
             this.logged = false;
             s.close();
