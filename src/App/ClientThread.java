@@ -60,15 +60,19 @@ class ClientThread extends Thread{
     }
 
     public void registo() throws IOException {
-        String nome, email;
+        String nome, password;
         pw.println("\nEscolha o username:");
         pw.flush();
         nome = br.readLine();
-        if(users.containsKey(nome)){pw.println("\n Username já existe!\n"); return;}
-        pw.println("Insira o seu e-mail:");
+        if(users.containsKey(nome)) {
+            pw.println("\n Username já existe!\n");
+            return;
+        }
+        pw.println("Insira a password:");
         pw.flush();
-        email = br.readLine();
-
+        password = br.readLine();
+        User u = new User (nome, password);
+        users.put(nome, u);
     }
 
 
@@ -180,6 +184,7 @@ class ClientThread extends Thread{
             System.out.println("\nErro na leituuuuuuuuuura");
         }
     }
+
     public void menuPrincipal () throws IOException {
         pw.println("\n==================\n");
         pw.println("1) Registo");

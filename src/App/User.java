@@ -10,6 +10,11 @@ public class User {
     private double valor;
     private List<Server> reservas;
 
+    public User (String u, String p) {
+        this.username = u;
+        this.password = p;
+    }
+
     public User(String u, String p, String e, double v){
         this.username = u;
         this.password = p;
