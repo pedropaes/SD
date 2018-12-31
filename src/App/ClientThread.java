@@ -94,8 +94,7 @@ class ClientThread extends Thread{
                         break;
             case "4":   consulta();
                         break;
-            case "5":   menuPrincipal();
-                        this.logged = false;
+            case "5":   this.logged = false;
                         break;
             default:
                 break;
@@ -112,7 +111,7 @@ class ClientThread extends Thread{
     public void verReservas(){
         User u = users.get(this.user);
         List <Server>  lista = u.getReservas();
-        if(lista!=null) {
+        if(lista.size() != 0) {
             for (Server s : lista) {
                 pw.println(s.toString());
             }
@@ -195,14 +194,12 @@ class ClientThread extends Thread{
                         break;
             case "2":   login();
                         break;
-            case "3":   System.out.println("Prima 'Enter' novamente");
-                        running = false;
-                        //System.exit(0);
+            case "3":   running = false;
+                        logged = false;
                         break;
             default:    System.out.println("\nOpção Inválida");
                         break;
         }
-        System.out.println(option);
     }
 
 
@@ -213,7 +210,6 @@ class ClientThread extends Thread{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             else try {
                 menuUtilizador();
             } catch (IOException e) {

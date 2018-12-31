@@ -9,9 +9,9 @@ public class User {
     private double valor;
     private List<Server> reservas;
 
-    public User (String u, String p) {
+    public User (String e, String p) {
         this.password = p;
-        this.email = u;
+        this.email = e;
         this.valor = 0;
         this.reservas = new ArrayList<>();
     }
