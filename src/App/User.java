@@ -4,27 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private String username;
     private String email;
     private String password;
     private double valor;
     private List<Server> reservas;
 
     public User (String u, String p) {
-        this.username = u;
         this.password = p;
+        this.email = u;
+        this.valor = 0;
+        this.reservas = new ArrayList<>();
     }
 
-    public User(String u, String p, String e, double v){
-        this.username = u;
+    public User (String u, String p, double v){
         this.password = p;
-        this.email = e;
+        this.email = u;
         this.valor = v;
         this.reservas = new ArrayList<>();
     }
 
     public String getUserName(){
-        return this.username;
+        return this.email;
     }
 
     public boolean login(String password){

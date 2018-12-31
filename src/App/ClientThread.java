@@ -1,6 +1,5 @@
 package App;
 
-import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.io.*;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -30,7 +29,7 @@ class ClientThread extends Thread{
     public boolean login(){
         String login, password;
         try {
-            pw.print("\nUtilizador: ");
+            pw.print("\nE-mail: ");
             pw.flush();
             login = br.readLine();
             pw.print("Password: ");
@@ -58,7 +57,7 @@ class ClientThread extends Thread{
 
     public void registo() throws IOException {
         String nome, password;
-        pw.println("\nEscolha o username:");
+        pw.println("\nInsira o e-mail:");
         pw.flush();
         nome = br.readLine();
         if(users.containsKey(nome)) {
@@ -112,11 +111,16 @@ class ClientThread extends Thread{
 
     public void verReservas(){
         User u = users.get(this.user);
-        List <Server>  lista = u.getReservas();
-        for(Server s: lista){
-            pw.println(s.toString());
+        try {
+            List <Server>  lista = u.getReservas();
+            for(Server s: lista){
+                pw.println(s.toString());
+            }
+            pw.flush();
+        } catch (Exception e) {
+            pw.println("\nNão existem reservas\n");
+            pw.flush();
         }
-        pw.flush();
     }
 
     public void libertarServidor(){
@@ -145,21 +149,17 @@ class ClientThread extends Thread{
 
 
     public void escolherServidor() {
-
         List<String> lista ;
         lista =  servers.entrySet().stream().sorted(Map.Entry.comparingByKey()).map(x -> x.getKey() +" - "+ x.getValue().getType()).collect(Collectors.toList());
-
-        for(int i = 0; i < lista.size();i++){
-            pw.println(lista.get(i));
+        for (String s : lista){
+            pw.println(s);
         }
         int n = 0;
-
         pw.flush();
-        String option = "";
+        String option;
         try {
             option = br.readLine();
             n = Integer.parseInt(option);
-
         } catch (Exception e) {
             System.out.println("\nErro na leitura");
         }
@@ -171,8 +171,10 @@ class ClientThread extends Thread{
                 pw.println(s.reserva(u,LocalDateTime.now()));
                 pw.flush();
             }
-            else{pw.println("\nServidor inexistente");pw.flush();}
-
+            else {
+                pw.println("\nServidor inexistente");
+                pw.flush();
+            }
         } catch (Exception e) {
             System.out.println("\nErro na leituuuuuuuuuura");
         }
