@@ -1,5 +1,6 @@
 package App;
 
+import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.io.*;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -28,7 +29,6 @@ class ClientThread extends Thread{
 
     public boolean login(){
         String login, password;
-
         try {
             pw.print("\nUtilizador: ");
             pw.flush();
@@ -50,13 +50,10 @@ class ClientThread extends Thread{
                 pw.println("\nCredenciais erradas!\n");
                 pw.flush();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return logged;
-
     }
 
     public void registo() throws IOException {
@@ -74,7 +71,6 @@ class ClientThread extends Thread{
         User u = new User (nome, password);
         users.put(nome, u);
     }
-
 
     public void menuUtilizador () throws IOException {
         pw.println("==================\n");
@@ -123,7 +119,6 @@ class ClientThread extends Thread{
         pw.flush();
     }
 
-
     public void libertarServidor(){
         User u = this.users.get(this.user);
         pw.println("\nIndique a chave do servidor que deseja libertar:");
@@ -144,17 +139,15 @@ class ClientThread extends Thread{
                 ServerBuffer sb = this.servers.get(s.getType());
                 sb.putServer(s);
                 iter.remove();
-
             }
         }
-
     }
 
 
     public void escolherServidor() {
 
         List<String> lista ;
-        lista =  servers.entrySet().stream().sorted(Map.Entry.<Integer, ServerBuffer>comparingByKey()).map(x -> x.getKey() +" - "+ x.getValue().getType()).collect(Collectors.toList());
+        lista =  servers.entrySet().stream().sorted(Map.Entry.comparingByKey()).map(x -> x.getKey() +" - "+ x.getValue().getType()).collect(Collectors.toList());
 
         for(int i = 0; i < lista.size();i++){
             pw.println(lista.get(i));
@@ -202,14 +195,14 @@ class ClientThread extends Thread{
                         break;
             case "2":   login();
                         break;
-            case "3":   running = false;
-                        System.exit(0);
+            case "3":   System.out.println("Prima 'Enter' novamente");
+                        running = false;
+                        //System.exit(0);
                         break;
             default:    System.out.println("\nOpção Inválida");
                         break;
         }
         System.out.println(option);
-
     }
 
 

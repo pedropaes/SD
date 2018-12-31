@@ -2,17 +2,14 @@ package App;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class App {
 
     public static void main(String[] args) throws Exception {
         Map<String, User> users = new HashMap<>();
-        User u1 = new User("pedro", "pedro", "pedro@mail.com", 0.0);
-
+        User u1 = new User("1", "1");
         users.put(u1.getUserName(),u1);
         Map<Integer, ServerBuffer> servers = new HashMap<>();
         ServerBuffer type1 = new ServerBuffer(3, "s1.small");
@@ -33,15 +30,11 @@ public class App {
         type2.putServer(s5);
         type2.putServer(s6);
 
-
         servers.put(1,type1);
         servers.put(2,type2);
 
         int port = Integer.parseInt(args[0]);
         ServerSocket ss = new ServerSocket(port);
-
-        int soma = 0;
-        String line ;
 
         while(true){
             Socket cs = ss.accept();
