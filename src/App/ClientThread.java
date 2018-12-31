@@ -111,16 +111,14 @@ class ClientThread extends Thread{
 
     public void verReservas(){
         User u = users.get(this.user);
-        try {
-            List <Server>  lista = u.getReservas();
-            for(Server s: lista){
+        List <Server>  lista = u.getReservas();
+        if(lista!=null) {
+            for (Server s : lista) {
                 pw.println(s.toString());
             }
-            pw.flush();
-        } catch (Exception e) {
-            pw.println("\nNão existem reservas\n");
-            pw.flush();
         }
+        else pw.println("Não existem reservas!");
+        pw.flush();
     }
 
     public void libertarServidor(){

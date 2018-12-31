@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2ae29a03-9d87-474d-b5c7-adab277ca181" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/src/App/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/ClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/User.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,8 +41,8 @@
       <file leaf-file-name="ClientThread.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App/ClientThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="143" column="32" lean-forward="true" selection-start-line="143" selection-start-column="32" selection-end-line="143" selection-end-column="32" />
+            <state relative-caret-position="394">
+              <caret line="113" column="47" lean-forward="true" selection-start-line="113" selection-start-column="47" selection-end-line="113" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -203,12 +202,12 @@
       <updated>1545095465025</updated>
       <workItem from="1545865314709" duration="739000" />
       <workItem from="1545866065184" duration="1256000" />
-      <workItem from="1546268030544" duration="3818000" />
+      <workItem from="1546268030544" duration="3969000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5813000" />
+    <option name="totallyTimeSpent" value="5964000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
@@ -224,7 +223,7 @@
       <window_info anchor="right" id="Maven Projects" order="1" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.425" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.425" />
       <window_info anchor="right" id="Material Palette" order="5" />
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info id="Capture Tool" order="0" />
@@ -714,8 +713,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App/ClientThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="143" column="32" lean-forward="true" selection-start-line="143" selection-start-column="32" selection-end-line="143" selection-end-column="32" />
+        <state relative-caret-position="394">
+          <caret line="113" column="47" lean-forward="true" selection-start-line="113" selection-start-column="47" selection-end-line="113" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
